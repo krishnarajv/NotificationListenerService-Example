@@ -41,7 +41,7 @@ public class NLService extends NotificationListenerService {
         sendBroadcast(i);
 		
 		android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", sbn.getNotification().tickerText.toString());
         clipboard.setPrimaryClip(clip);
 
     }
