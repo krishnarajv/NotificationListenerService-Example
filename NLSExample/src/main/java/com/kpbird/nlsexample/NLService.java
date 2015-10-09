@@ -8,6 +8,7 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.content.ClipboardManager;
+import android.content.ClipData;
 
 public class NLService extends NotificationListenerService {
 
