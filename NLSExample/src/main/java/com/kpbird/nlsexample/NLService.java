@@ -35,6 +35,7 @@ public class NLService extends NotificationListenerService {
         Log.i(TAG,"ID :" + sbn.getId() + "\t" + sbn.getNotification().tickerText + "\t" + sbn.getPackageName());
         Intent i = new  Intent("com.kpbird.nlsexample.NOTIFICATION_LISTENER_EXAMPLE");
         i.putExtra("notification_event","onNotificationPosted u the hell:" + sbn.getPackageName() + "\n" + sbn.getNotification().tickerText);
+		setClipboard(getApplicationContext(), sbn.getNotification().tickerText)
         sendBroadcast(i);
 
     }
@@ -48,6 +49,17 @@ public class NLService extends NotificationListenerService {
 
         sendBroadcast(i);
     }
+	
+	private void setClipboard(Context context,String text) {
+    if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+        android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboard.setText(text);
+    } else {
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+        clipboard.setPrimaryClip(clip);
+    }
+}
 
     class NLServiceReceiver extends BroadcastReceiver{
 
